@@ -60,6 +60,7 @@ jobs:
       id-token: write
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }} # <-- tells Actions what the environment URL is
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
