@@ -7,9 +7,7 @@ on:
   push:
     # run on push to main branch or any feature branch
     branches:
-      - main
-      - 'feature/**'
-      - 'any'
+      - brij
     # run on manual trigger
     # ignore changes to certain files   
     paths-ignore:

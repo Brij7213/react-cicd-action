@@ -4,9 +4,6 @@ on:
     branches:
       - main
       - 'feature/**'
-      - 'any'
-    paths-ignore:
-      - '/github/workflows/*'
       - 'readme.md'
   workflow_dispatch:
 
@@ -49,31 +46,20 @@ jobs:
         run: npm ci 
       - name: Build Project
         run: npm run build
-      - name: Upload Dist Artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: dist-files
-          path: dist
-
+          path: ./dist  # folder containing the built site
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    
     permissions:
-      pages: read  # to deploy to GitHub Pages
-      id-token: write  # to verify the deployment originates from an appropropriate source
-    
+      pages: write  # required to deploy to Pages
+      id-token: write
     environment:
-        name: github-pages
-        url: ${{ steps.deploy.outputs.page_url }}
+      name: github-pages
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-        
-
-
-          
-
