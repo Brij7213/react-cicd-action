@@ -9,13 +9,14 @@ on:
     branches:
       - main
       - 'feature/**'
+      - 'any'
     # run on manual trigger
    # ignore changes to certain files   
     paths-ignore:
       - '/github/workflows/*'
       - 'readme.md'
   workflow_dispatch:  # allow manual trigger of the workflow
-      
+
 jobs:
   test:
     runs-on: ubuntu-latest
