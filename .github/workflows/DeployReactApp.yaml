@@ -1,4 +1,4 @@
-name: Deploy Dist
+name: Deploy React to github Pages
 on:
   push:
     branches:
@@ -49,6 +49,7 @@ jobs:
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
+          name: github-pages
           path: ./dist  # folder containing the built site
 
   deploy:
