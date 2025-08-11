@@ -11,7 +11,7 @@ on:
       - 'feature/**'
       - 'any'
     # run on manual trigger
-   # ignore changes to certain files   
+    # ignore changes to certain files   
     paths-ignore:
       - '/github/workflows/*'
       - 'readme.md'
@@ -46,7 +46,7 @@ jobs:
       - name: Run Tests
         run: npm run test
 
-  deploy:
+  build:
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -65,6 +65,22 @@ jobs:
         run: npm ci  #ci use the package-lock.json file to install dependencies
       - name: Build Project
         run: npm run build
+      - name: Upload Dist Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-files
+          path: dist
+
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Dist Artifact
+        uses: actions/download-artifact@v4 
+        with:
+          name: dist-files
+          path: dist
       - name: Deploy 
         run: echo "Deploying to production..."
           
